@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:returned_project/controller/company_controller.dart';
 import 'package:returned_project/model/company.dart';
 import 'package:returned_project/views/screens/home_screen.dart';
 
@@ -21,33 +22,27 @@ void main() {
       }
     ],
     "products": [
-      {
-        "name": "Product A",
-        "price": 29.99,
-        "inStock": true
-      },
-      {
-        "name": "Product B",
-        "price": 49.99,
-        "inStock": false
-      }
+      {"name": "Product A", "price": 29.99, "inStock": true},
+      {"name": "Product B", "price": 49.99, "inStock": false}
     ]
   });
 
-  runApp(MyApp(company: company));
+  CompanyController controller = CompanyController(company: company);
+
+  runApp(MyApp(controller: controller));
 }
 
 class MyApp extends StatelessWidget {
-  final Company company;
+  final CompanyController controller;
 
-  MyApp({required this.company});
+  MyApp({required this.controller});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Tech Solutions',
       theme: ThemeData(primarySwatch: Colors.blue),
-      home: HomeScreen(company: company),
+      home: HomeScreen(controller: controller),
     );
   }
 }
